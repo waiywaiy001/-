@@ -1,6 +1,4 @@
-<!DOCTYPE html>
-<html lang="zh-TW">
-<head>
+<html lang="zh-TW"><head>
     <meta charset="UTF-8">
     <title>個人創作與生活管理系統 v3</title>
     <style>
@@ -51,11 +49,11 @@
 <body>
 
 <div class="container">
-    <h1 id="viewTitle">載入中...</h1>
+    <h1 id="viewTitle">週一 行程表</h1>
     
-    <div class="nav-bar" id="navBar"></div>
+    <div class="nav-bar" id="navBar"><button class="nav-btn">週日</button><button class="nav-btn active">週一</button><button class="nav-btn">週二</button><button class="nav-btn">週三</button><button class="nav-btn">週四</button><button class="nav-btn">週五</button><button class="nav-btn">週六</button><button class="nav-btn all-view">📅 全週總覽</button></div>
 
-    <div id="tableView">
+    <div id="tableView" style="display: block;">
         <table id="scheduleTable">
             <thead>
                 <tr>
@@ -67,7 +65,57 @@
                     <th style="width: 50px;">操作</th>
                 </tr>
             </thead>
-            <tbody id="scheduleBody"></tbody>
+            <tbody id="scheduleBody"><tr class="draggable-row " draggable="true" data-index="0">
+                <td style="color:#ccc; text-align:center;">☰</td>
+                <td class="check-col"><input type="checkbox" onchange="toggleDone(0, this.checked)"></td>
+                <td><span class="editable" contenteditable="true" onblur="update(0, 't', this.innerText)">09:30</span></td>
+                <td><span class="editable" contenteditable="true" onblur="update(0, 'task', this.innerText)">起床</span></td>
+                <td><span class="editable" contenteditable="true" onblur="update(0, 'note', this.innerText)"></span></td>
+                <td><button onclick="removeRow(0)" style="color:#e74c3c; border:none; background:none; cursor:pointer;">✕</button></td>
+            </tr><tr class="draggable-row " draggable="true" data-index="1">
+                <td style="color:#ccc; text-align:center;">☰</td>
+                <td class="check-col"><input type="checkbox" onchange="toggleDone(1, this.checked)"></td>
+                <td><span class="editable" contenteditable="true" onblur="update(1, 't', this.innerText)">9:40~10:10</span></td>
+                <td><span class="editable" contenteditable="true" onblur="update(1, 'task', this.innerText)">早餐</span></td>
+                <td><span class="editable" contenteditable="true" onblur="update(1, 'note', this.innerText)"></span></td>
+                <td><button onclick="removeRow(1)" style="color:#e74c3c; border:none; background:none; cursor:pointer;">✕</button></td>
+            </tr><tr class="draggable-row " draggable="true" data-index="2">
+                <td style="color:#ccc; text-align:center;">☰</td>
+                <td class="check-col"><input type="checkbox" onchange="toggleDone(2, this.checked)"></td>
+                <td><span class="editable" contenteditable="true" onblur="update(2, 't', this.innerText)">10:10~12:00</span></td>
+                <td><span class="editable" contenteditable="true" onblur="update(2, 'task', this.innerText)">工作</span></td>
+                <td><span class="editable" contenteditable="true" onblur="update(2, 'note', this.innerText)"></span></td>
+                <td><button onclick="removeRow(2)" style="color:#e74c3c; border:none; background:none; cursor:pointer;">✕</button></td>
+            </tr><tr class="draggable-row " draggable="true" data-index="3">
+                <td style="color:#ccc; text-align:center;">☰</td>
+                <td class="check-col"><input type="checkbox" onchange="toggleDone(3, this.checked)"></td>
+                <td><span class="editable" contenteditable="true" onblur="update(3, 't', this.innerText)">12:00~13:30</span></td>
+                <td><span class="editable" contenteditable="true" onblur="update(3, 'task', this.innerText)">午休時間</span></td>
+                <td><span class="editable" contenteditable="true" onblur="update(3, 'note', this.innerText)"></span></td>
+                <td><button onclick="removeRow(3)" style="color:#e74c3c; border:none; background:none; cursor:pointer;">✕</button></td>
+            </tr><tr class="draggable-row " draggable="true" data-index="4">
+                <td style="color:#ccc; text-align:center;">☰</td>
+                <td class="check-col"><input type="checkbox" onchange="toggleDone(4, this.checked)"></td>
+                <td><span class="editable" contenteditable="true" onblur="update(4, 't', this.innerText)">13:30~18:30</span></td>
+                <td><span class="editable" contenteditable="true" onblur="update(4, 'task', this.innerText)">工作</span></td>
+                <td><span class="editable" contenteditable="true" onblur="update(4, 'note', this.innerText)"></span></td>
+                <td><button onclick="removeRow(4)" style="color:#e74c3c; border:none; background:none; cursor:pointer;">✕</button></td>
+            </tr><tr class="draggable-row " draggable="true" data-index="5">
+                <td style="color:#ccc; text-align:center;">☰</td>
+                <td class="check-col"><input type="checkbox" onchange="toggleDone(5, this.checked)"></td>
+                <td><span class="editable" contenteditable="true" onblur="update(5, 't', this.innerText)">18:30~21:30
+</span></td>
+                <td><span class="editable" contenteditable="true" onblur="update(5, 'task', this.innerText)">新任務</span></td>
+                <td><span class="editable" contenteditable="true" onblur="update(5, 'note', this.innerText)"></span></td>
+                <td><button onclick="removeRow(5)" style="color:#e74c3c; border:none; background:none; cursor:pointer;">✕</button></td>
+            </tr><tr class="draggable-row " draggable="true" data-index="6">
+                <td style="color:#ccc; text-align:center;">☰</td>
+                <td class="check-col"><input type="checkbox" onchange="toggleDone(6, this.checked)"></td>
+                <td><span class="editable" contenteditable="true" onblur="update(6, 't', this.innerText)">21:30</span></td>
+                <td><span class="editable" contenteditable="true" onblur="update(6, 'task', this.innerText)">日語課</span></td>
+                <td><span class="editable" contenteditable="true" onblur="update(6, 'note', this.innerText)"></span></td>
+                <td><button onclick="removeRow(6)" style="color:#e74c3c; border:none; background:none; cursor:pointer;">✕</button></td>
+            </tr></tbody>
         </table>
         <div class="btn-group">
             <span style="font-size: 0.85em; color: #95a5a6;">💡 拖曳 ↕ 排序，點擊文字編輯，勾選完成任務</span>
@@ -240,5 +288,5 @@
     init();
 </script>
 
-</body>
-</html>
+
+</body></html>
